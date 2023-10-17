@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        
+        
+        #app{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        
+        
+        .product{
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 25%;
+
+        }
+
+        .product> img{
+            width: 100%;
+        }
+
+        .product>h2{
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .product>p{
+            font-size: 14px;
+            color: #888;
+            margin: 10px 0;
+
+        }
+        .product> .payment{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+        .product> .payment >span{
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="product">
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-13-finish-select-202207-pink?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693063160403" alt="">
+            <h2>iphone</h2>
+            <p>lorem ipsum ....</p>
+            <div class="payment">
+                <span>100$</span>
+                <button>buy</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    
+    <script>
+        const apiEndpoint ="https://fakestoreapi.com/products";
+
+        fetch(apiEndpoint)
+        .then(res => res.json())
+        .then(data => {
+            //tat ca cac thao tac xu ly du lieu lay tu API ve se duoc thuc hien o day ,trong ham then thu 2 
+            console.log(data)
+            // console .log(data[0].title)
+            // tu du lieu 20 sp => hien thi danh sach 20 sp tren web
+            //tao ra 20 the div , moi the div chua thong tin cua 1 sp 
+            data.forEach((item,index)=> {
+                //logic trong forEach se duoc thuc hien 20 lan , tuong ung voi 20 sp
+                const appEL = document.getElementById("app");
+                appEL.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                         
+                          <div class="product">
+                             <img src="${item.image}" alt="">
+                             <h2>${item.title}</h2>
+                             <p>${item.description}</p>
+                             <div class="payment">
+                                 <span>${item.price}$</span>
+                                 <button>buy</button>
+
+                             </div>
+
+                           </div>
+                    `
+
+                    
+                
+
+                        
+
+                    
+                
+
+                    
+                    
+                    
+                    
+                );
+            });
+
+        });
+
+        //console.log(data);//khong the truy cap vao data o day ,vi data chi ton tai trong ham then thu 2
+
+        console.log(100);
+    </script>
+</body>
+</html>
